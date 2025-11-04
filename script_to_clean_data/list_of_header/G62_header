@@ -1,0 +1,128 @@
+--- Target Layer: G62_SA1_2021_NSW ---
+
+File Read Successful! Total Columns: 112 ---
+
+Column Headers (Row Names) List:
+ - SA1_CODE_2021
+ - SA1_NAME_2021
+ - One_method_Train_M
+ - One_method_Train_F
+ - One_method_Train_P
+ - One_method_Bus_M
+ - One_method_Bus_F
+ - One_method_Bus_P
+ - One_method_Ferry_M
+ - One_method_Ferry_F
+ - One_method_Ferry_P
+ - One_met_Tram_or_lt_rail_M
+ - One_met_Tram_or_lt_rail_F
+ - One_met_Tram_or_lt_rail_P
+ - One_met_Taxi_or_Rideshare_M
+ - One_met_Taxi_or_Rideshare_F
+ - One_met_Taxi_or_Rideshare_P
+ - One_method_Car_as_driver_M
+ - One_method_Car_as_driver_F
+ - One_method_Car_as_driver_P
+ - One_method_Car_as_passenger_M
+ - One_method_Car_as_passenger_F
+ - One_method_Car_as_passenger_P
+ - One_method_Truck_M
+ - One_method_Truck_F
+ - One_method_Truck_P
+ - One_method_Motorbike_scootr_M
+ - One_method_Motorbike_scootr_F
+ - One_method_Motorbike_scootr_P
+ - One_method_Bicycle_M
+ - One_method_Bicycle_F
+ - One_method_Bicycle_P
+ - One_method_Other_M
+ - One_method_Other_F
+ - One_method_Other_P
+ - One_method_Walked_only_M
+ - One_method_Walked_only_F
+ - One_method_Walked_only_P
+ - One_method_Tot_one_method_M
+ - One_method_Tot_one_method_F
+ - One_method_Tot_one_method_P
+ - Two_methods_Train_Bus_M
+ - Two_methods_Train_Bus_F
+ - Two_methods_Train_Bus_P
+ - Two_methods_Train_Ferry_M
+ - Two_methods_Train_Ferry_F
+ - Two_methods_Train_Ferry_P
+ - Two_mt_trn_Trm_or_lt_rail_M
+ - Two_mt_trn_Trm_or_lt_rail_F
+ - Two_mt_trn_Trm_or_lt_rail_P
+ - Two_methods_Trn_Car_as_drvr_M
+ - Two_methods_Trn_Car_as_drvr_F
+ - Two_methods_Trn_Car_as_drvr_P
+ - Two_methods_Trn_Car_as_pass_M
+ - Two_methods_Trn_Car_as_pass_F
+ - Two_methods_Trn_Car_as_pass_P
+ - Two_methods_Train_Other_M
+ - Two_methods_Train_Other_F
+ - Two_methods_Train_Other_P
+ - Two_methods_Train_Tot_M
+ - Two_methods_Train_Tot_F
+ - Two_methods_Train_Tot_P
+ - Two_methods_Bus_Ferry_M
+ - Two_methods_Bus_Ferry_F
+ - Two_methods_Bus_Ferry_P
+ - Two_mth_Bu_Trm_or_lt_rail_M
+ - Two_mth_Bu_Trm_or_lt_rail_F
+ - Two_mth_Bu_Trm_or_lt_rail_P
+ - Two_methods_Bus_Car_as_drvr_M
+ - Two_methods_Bus_Car_as_drvr_F
+ - Two_methods_Bus_Car_as_drvr_P
+ - Two_methods_Bus_Car_as_pass_M
+ - Two_methods_Bus_Car_as_pass_F
+ - Two_methods_Bus_Car_as_pass_P
+ - Two_methods_Bus_Other_M
+ - Two_methods_Bus_Other_F
+ - Two_methods_Bus_Other_P
+ - Two_methods_Bus_Tot_M
+ - Two_methods_Bus_Tot_F
+ - Two_methods_Bus_Tot_P
+ - Two_methds_Othr_two_methds_M
+ - Two_methds_Othr_two_methds_F
+ - Two_methds_Othr_two_methds_P
+ - Two_methods_Tot_two_methods_M
+ - Two_methods_Tot_two_methods_F
+ - Two_methods_Tot_two_methods_P
+ - Three_meth_Tr_2_oth_meth_M
+ - Three_meth_Tr_2_oth_meth_F
+ - Three_meth_Tr_2_oth_meth_P
+ - Three_met_Bs_2_ot_met_ex_tr_M
+ - Three_met_Bs_2_ot_met_ex_tr_F
+ - Three_met_Bs_2_ot_met_ex_tr_P
+ - Three_meth_Othr_three_meth_M
+ - Three_meth_Othr_three_meth_F
+ - Three_meth_Othr_three_meth_P
+ - Three_meth_Tot_three_meth_M
+ - Three_meth_Tot_three_meth_F
+ - Three_meth_Tot_three_meth_P
+ - Worked_home_M
+ - Worked_home_F
+ - Worked_home_P
+ - Did_not_go_to_work_M
+ - Did_not_go_to_work_F
+ - Did_not_go_to_work_P
+ - Method_travel_to_work_ns_M
+ - Method_travel_to_work_ns_F
+ - Method_travel_to_work_ns_P
+ - Tot_M
+ - Tot_F
+ - Tot_P
+ - AREA_ALBERS_SQKM
+ - geometry
+
+-------------------
+Found Geographic ID Header: SA1_CODE_2021
+
+Preview of First 5 Rows (ID, Geometry, and First 4 Data Cols):
+  SA1_CODE_2021  ... One_method_Train_P
+0   10102100701  ...                  0
+1   10102100702  ...                  0
+2   10102100703  ...                  0
+3   10102100704  ...                  0
+4   10102100705  ...                  0
