@@ -57,20 +57,46 @@ The result of this entire process is the `FINAL_TRAINING_DATASET.csv`. Every row
 represents one location, and every column represents one of the features we so carefully engineered,
 plus our final success label.
 
-### 2.3. Modeling & Evaluation
+## 3. Model Upgrade: The Journey from F1 = 0 to a Tuned Model
 
-* **Model Choice (Random Forest):** We didn't just pick any model. We chose a 
-**Random Forest Classifier** (using `RF_with_scikit_learn.py`) for several key reasons. It's 
-a **robust** algorithm that excels at handling complex, real-world data with many features.
-It builds hundreds of individual "decision trees" and combines their votes, which makes it
-**highly accurate** and **less prone** to overfitting (i.e., memorizing the training data instead 
-of learning its patterns).
+Our initial modeling attempts (documented in `Data_selection/` scripts) revealed a critical flaw. While the model had high *accuracy* (96%), it was useless. It achieved this by simply predicting "Not Suitable" for every location.
 
-* **Evaluation:** How do we know it's any good? We don't just trust the training accuracy.
-We compare our main model against `Baseline_RF.py`. This baseline acts as our "sanity check." 
-It's the simple model we have to beat. Our final model must **significantly outperform** this 
-baseline to prove that our complex feature engineering and modeling were actually worth the effort.
+This section documents the step-by-step iteration, recorded in the root directory, that took our model from non-functional to fully tuned.
 
-## 3. Author
+The core challenge was **extreme class imbalance**: our training data contained 15,179 "Not Suitable" (Class 0) locations but only 621 "Suitable" (Class 1) locations.
+
+### 3.1 `Baseline_RF.py`
+
+* **Problem:** We needed to establish a starting point. What happens if we do nothing special?
+* **Tool:** A standard `RandomForestClassifier` with default settings.
+* **Reason:** This is the "naive" attempt. We must first prove that a problem exists.
+* **Result (Failure):** A 96% **accuracy** but a **0.00 F1-score** for `Class 1`. The model was completely "blind" and learned to ignore all 621 suitable locations. This confirmed the imbalance was a critical issue.
+
+### 3.2 `Baseline_RF_with_class_weight.py` (and `RF_with_scikit-learn.py`)
+
+* **Problem:** The naive model was "blind" (F1=0.00). We needed to force it to pay attention to the rare `Class 1`.
+* **Tool:** The `class_weight='balanced'` parameter built into Scikit-learn.
+* **Reason (Algorithm-Level Fix):** This is the quickest solution. It's an "algorithm-level" fix that tells the model, "You will be *penalised* 100x more for misclassifying a rare `Class 1` sample than a common `Class 0` sample."
+* **Result (Failure):** This strategy failed. The F1-score only improved from 0.00 to **0.01**. This proved that simply "penalising" the model was not enough; the data itself was the problem.
+
+### 3.3 `RF_with_SMOTE.py`
+
+* **Problem:** The algorithm-level fix (`class_weight`) failed. We needed to fix the *data* itself.
+* **Tool:** `SMOTE` (Synthetic Minority Over-sampling TEchnique), from the `imbalanced-learn` library.
+* **Reason (Data-Level Fix):** Instead of punishing the model, we "fixed" the data. SMOTE analyses the 621 `Class 1` samples and generates thousands of new, synthetic, but realistic `Class 1` samples. This gave us a perfectly balanced 1:1 dataset for the model to train on.
+* **Result (Success!):** This was our first major breakthrough. The F1-score jumped from 0.01 to **0.29**. This script established our first successful, working baseline. The model could finally "see" and learn the patterns of a suitable location.
+
+### 3.4 `RF_with_SMOTE_rainforced_GridSearchCV.py`
+
+* **Problem:** Our 0.29 F1-score was good, but it was based on default parameters. We needed to find the *optimal* parameters (e.g., `max_depth`, `n_estimators`) to build the best model possible.
+* **Tool:** `GridSearchCV` combined with an `imbalanced-learn Pipeline`.
+* **Reason (Professional Tuning):** This is the final, professional step.
+    1.  `GridSearchCV` automatically tests hundreds of different parameter combinations (144 in our case) to find the "golden" settings.
+    2.  The **`Pipeline`** was essential to fix a **"data leakage"** trap. It bundles `SMOTE` and the `RandomForestClassifier` together. This ensures that, during cross-validation, `SMOTE` is *only* applied to the training portion, not the validation portion. This prevents the model from "cheating" and gives us an honest, non-overfitted result.
+* **Result (Final Model):** We found the *true* optimal model. While the final F1-score was **0.26** (an honest score), the underlying metrics were far superior. This model delivered a **Recall of 0.53**, meaning it successfully found 82 of the 155 real-world suitable locations in our test set—**more than double** the 37 locations our 0.29 baseline found. This "high-recall" model is far more valuable for finding the maximum number of business opportunities.
+
+
+
+## 4. Author
 
 * **Jianduojie Dan**
