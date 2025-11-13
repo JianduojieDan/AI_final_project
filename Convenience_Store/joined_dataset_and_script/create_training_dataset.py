@@ -6,7 +6,7 @@ import time
 print("Starting final training dataset creation...")
 start_time = time.time()
 
-BASE_PATH = "/Convenience_Store/Data_for_Conven/"
+BASE_PATH = "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience_Store/Data_for_Conven"
 ORIGINAL_GPKG_PATH = "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/data/Geopackage_2021_G01_NSW_GDA2020/G01_NSW_GDA2020.gpkg"
 GPKG_LAYER_NAME = "G01_SA1_2021_NSW"
 
