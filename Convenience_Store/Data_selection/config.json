@@ -1,30 +1,45 @@
 {
   "G01": {
     "input_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/data/Geopackage_2021_G01_NSW_GDA2020/G01_NSW_GDA2020.gpkg",
-    "output_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience Store/Data_for_Conven/G01.conven.csv",
+    "output_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience_Store/Data_for_Conven/G01.conven.csv",
     "layer_name": "G01_SA1_2021_NSW",
     "columns_to_extract": [
-      "SA1_CODE_2021", "AREA_ALBERS_SQKM", "Tot_P_P", "Age_15_19_yr_P",
-      "Age_20_24_yr_P", "Age_25_34_yr_P", "Age_psns_att_edu_inst_15_19_P",
-      "Age_psns_att_edu_inst_20_24_P"
+      "SA1_CODE_2021",
+      "AREA_ALBERS_SQKM",
+      "Tot_P_P",
+      "Age_15_19_yr_P",
+      "Age_20_24_yr_P",
+      "Age_25_34_yr_P",
+      "Age_35_44_yr_P",
+      "Age_45_54_yr_P",
+      "Age_psns_att_edu_inst_15_19_P",
+      "Age_psns_att_edu_inst_20_24_P",
+      "High_yr_schl_comp_Yr_12_eq_P"
     ]
   },
   "G33": {
     "input_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/data/Geopackage_2021_G33_NSW_GDA2020/G33_NSW_GDA2020.gpkg",
-    "output_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience Store/Data_for_Conven/G33.conven.csv",
+    "output_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience_Store/Data_for_Conven/G33.conven.csv",
     "layer_name": "G33_SA1_2021_NSW",
     "columns_to_extract": [
-      "SA1_CODE_2021", "Tot_Tot", "Negative_Nil_income_Tot",
-      "HI_1500_1749_Tot", "HI_2000_2499_Tot"
+      "SA1_CODE_2021",
+      "Tot_Tot",
+      "Negative_Nil_income_Tot",
+      "HI_1500_1749_Tot",
+      "HI_2000_2499_Tot"
     ]
   },
   "G62": {
     "input_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/data/Geopackage_2021_G62_NSW_GDA2020/G62_NSW_GDA2020.gpkg",
-    "output_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience Store/Data_for_Conven/G62.conven.csv",
+    "output_path": "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience_Store/Data_for_Conven/G62.conven.csv",
     "layer_name": "G62_SA1_2021_NSW",
     "columns_to_extract": [
-      "SA1_CODE_2021", "Tot_P", "One_method_Bus_P",
-      "One_method_Walked_only_P", "Worked_home_P", "Did_not_go_to_work_P"
+      "SA1_CODE_2021",
+      "Tot_P",
+      "One_method_Bus_P",
+      "One_method_Walked_only_P",
+      "Worked_home_P",
+      "Did_not_go_to_work_P"
     ]
   }
 }

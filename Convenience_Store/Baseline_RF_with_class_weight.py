@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 import numpy as np
 
-file_path = '/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience_Store/Data_for_Conven/FINAL_TRAINING_DATASET.csv'
+file_path = 'Data_for_Conven/FINAL_TRAINING_DATASET.csv'
 try:
     df = pd.read_csv(file_path)
 except FileNotFoundError:
