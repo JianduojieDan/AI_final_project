@@ -1,5 +1,5 @@
 # AI Final Project: A Data-Driven Model for Retail Site Selection
-
+[![观看演示](data/Screenshot 2025-11-15 at 02.07.24.png)](data/grok-video-2287e199-b073-4b96-905b-b76c0f37b45c-1.mp4)
 This project, developed for the "Intro to AI" course, implements a machine learning pipeline to predict the viability of new convenience store locations. The methodology leverages geospatial data, OpenStreetMap (OSM) points of interest, and demographic data to train a classification model.
 
 ## Table of Contents
