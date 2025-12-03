@@ -111,8 +111,7 @@ Our final model was the result of a deliberate, multi-step iteration process, re
 * **Key Insight:** The `Pipeline` was *essential*. It bundles `SMOTE` and the `RandomForestClassifier` together, ensuring that SMOTE is *only* applied to the training folds during cross-validation, preventing data leakage and giving an honest performance estimate.
 
 ### Iteration 5: Hyperparameter Tuning (GridSearchCV Pipeline)
-Script: `RF_selector_with_SMOTE_rainforced_GridSearchCV.py`
-
+*Script:** `RF_selector_with_SMOTE_rainforced_GridSearchCV.py`
 Design: 
 Instead of guessing parameters, we built a formal pipeline integrating SMOTE and Random Forest inside a GridSearchCV.
 - **Search Space**: Tested various combinations of `n_estimators` (10-500) and `max_depth` (10-30).
