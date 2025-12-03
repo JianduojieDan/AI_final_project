@@ -50,7 +50,8 @@ This was the most crucial part: forging these raw, different data sources into a
 >     ```
 
 4.  **Feature Engineering:** The professor's final suggestion was implemented in `Group_attributes_to_finalize_data.py`. Instead of using all 136 raw features, this script engineers 15 *meaningful* features like `pop_density`, `core_consumer`, and `competitor_density`. This was the most important step for model performance.
-
+> * **136 columns of raw data already has been grouped to 15 features, if you want to see the origional data, please check push history**
+> * **From Iteration 1 to Iteration 5, i am using 136 columns of feature, but after iteration 5, i switched to grouped features.**
 The result of this entire process is the `FINAL_TRAINING_DATASET.csv`.
 
 ## 3. Project Roadmap & Model Iteration
@@ -59,7 +60,7 @@ Our final model was the result of a deliberate, multi-step iteration process, re
 
 ### Iteration 1: `Baseline_RF.py` (The Naive Model)
 
-* **Design:** A standard `RandomForestClassifier` with default settings, trained on the initial 136 features，**but right now there are only 15 features inside, if you want to verify the origional 136 columns of raw data, please check push history.
+* **Design:** A standard `RandomForestClassifier` with default settings, trained on the initial 136 features.
 * **Problem:** The training data was extremely imbalanced (15,179 "Not Suitable" vs. 621 "Suitable").
 * **Result (Poor):** While accuracy was 96%, this was misleading. The model was "blind" to the minority class, achieving a very low **F1-score of 0.13** for "Suitable" locations.
     ```
