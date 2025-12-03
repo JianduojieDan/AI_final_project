@@ -7,8 +7,11 @@ import numpy as np
 print("Starting final training dataset creation...")
 start_time = time.time()
 
-BASE_PATH = "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/Convenience_Store/Data_for_Conven"
-ORIGINAL_GPKG_PATH = "/Users/Zhuanz/Documents/ACADEMIC/fifth-semaster/Introduction-to-AI/final_project/data/Geopackage_2021_G01_NSW_GDA2020/G01_NSW_GDA2020.gpkg"
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_PATH = os.path.join(CURRENT_DIR, '..', 'Data_for_Conven')
+DATA_DIR = os.path.join(CURRENT_DIR, '..', '..', 'data', 'Geopackage_2021_G01_NSW_GDA2020')
+
+ORIGINAL_GPKG_PATH = os.path.join(DATA_DIR, 'G01_NSW_GDA2020.gpkg')
 GPKG_LAYER_NAME = "G01_SA1_2021_NSW"
 
 store_locations_csv = os.path.join(BASE_PATH, 'convenience_stores_locations.csv')
@@ -16,6 +19,16 @@ features_csv = os.path.join(BASE_PATH, 'MASTER_Convenience_Store_Dataset.csv')
 
 #final cleaned dataset
 FINAL_TRAINING_DATASET_PATH = os.path.join(BASE_PATH, 'FINAL_TRAINING_DATASET.csv')
+
+def apply_binning(df, cols_to_bin):
+    binned_df = df.copy()
+    for col in cols_to_bin:
+        if col in binned_df.columns:
+            try:
+                binned_df[col] = pd.qcut(binned_df[col], q=5, labels=False, duplicates='drop')
+            except ValueError:
+                pass
+    return binned_df
 
 #Group attributes to erase noise and improve models' performance
 def group_and_engineer_features(df):
@@ -40,7 +53,7 @@ def group_and_engineer_features(df):
     students = df['Age_psns_att_edu_inst_15_19_P'] + df['Age_psns_att_edu_inst_20_24_P']
     engineered_df['students'] = students / base_pop
 
-    #highly_educated populatioins
+    #highly_educated populations
     highly_educated = df['High_yr_schl_comp_Yr_12_eq_P']
     engineered_df['highly_educated'] = highly_educated / base_pop
 
@@ -97,8 +110,6 @@ def group_and_engineer_features(df):
     return engineered_df
 
 
-
-
 print(f"Loading store locations from {store_locations_csv}...")
 try:
     stores_df = pd.read_csv(store_locations_csv)
@@ -111,6 +122,7 @@ try:
     print(f"Loaded {len(stores_gdf)} store locations.")
 except FileNotFoundError:
     print(f"Error: Store locations file not found at {store_locations_csv}")
+    print(f"Current Directory: {CURRENT_DIR}") # Debug info
     exit()
 
 print("Loading SA1 features and shapes...")
@@ -118,6 +130,10 @@ try:
     features_df = pd.read_csv(features_csv)
     print(f"Loaded {len(features_df)} SA1 feature rows with {len(features_df.columns)} original features.")
     features_df = group_and_engineer_features(features_df)
+
+    cols_to_bin = [col for col in features_df.columns if col != 'SA1_CODE_2021']
+    features_df = apply_binning(features_df, cols_to_bin)
+
     print(f"Loading geometries from {ORIGINAL_GPKG_PATH}...")
     sa1_shapes_gdf = gpd.read_file(
         ORIGINAL_GPKG_PATH,
@@ -126,7 +142,6 @@ try:
         usecols=['SA1_CODE_2021', 'geometry']
     )
 
-    #fixed code here:
     print("Fixing data types for merge...")
     features_df['SA1_CODE_2021'] = features_df['SA1_CODE_2021'].astype(str)
     sa1_shapes_gdf['SA1_CODE_2021'] = sa1_shapes_gdf['SA1_CODE_2021'].astype(str)
@@ -171,7 +186,16 @@ else:
 print("Saving final training dataset...")
 
 # remove the index 'shape' from dataset cause there is no need for training AI
-final_df_to_save = pd.DataFrame(final_gdf.drop(columns='geometry'))
+final_cols = [
+    'SA1_CODE_2021',
+    'pop_density', 'core_consumer', 'students', 'highly_educated',
+    'high_income', 'mid_income', 'low_income',
+    'bus', 'walk',
+    'competitor_density', 'food_density', 'finance_density',
+    'community_density', 'other_store_density', 'traffic_density',
+    'store_count'
+]
+final_df_to_save = pd.DataFrame(final_gdf[final_cols])
 
 final_df_to_save.to_csv(FINAL_TRAINING_DATASET_PATH, index=False)
 
