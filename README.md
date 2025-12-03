@@ -110,7 +110,7 @@ Our final model was the result of a deliberate, multi-step iteration process, re
     * [Imbalanced-learn Documentation on Pipeline](https://imbalanced-learn.org/stable/references/generated/imblearn.pipeline.Pipeline.html)
 * **Key Insight:** The `Pipeline` was *essential*. It bundles `SMOTE` and the `RandomForestClassifier` together, ensuring that SMOTE is *only* applied to the training folds during cross-validation, preventing data leakage and giving an honest performance estimate.
 
-Iteration 5: Hyperparameter Tuning (GridSearchCV Pipeline)
+### Iteration 5: Hyperparameter Tuning (GridSearchCV Pipeline)
 Script: `RF_selector_with_SMOTE_rainforced_GridSearchCV.py`
 
 Design: 
@@ -127,7 +127,7 @@ The GridSearch identified the optimal parameters: `max_depth=3` and `n_estimator
 * **The Solution:** The `Group_attributes_to_finalize_data.py` script was created. This script implements **feature engineering** to transform the 136 raw columns into 15 highly-relevant, engineered features like `pop_density`, `core_consumer` (key age groups), `competitor_density`, and `food_density`.
 * **Final Model:** We re-run the `RF_selector_with_SMOTE_rainforced_GridSearchCV.py` pipeline on these new 15 features. This final, high-recall model is far more valuable for finding the maximum number of business opportunities.
 
-Iteration 7: The Final Model (Robust & Generalized)
+### Iteration 7: The Final Model (Robust & Generalized)
 Script: `RF_after_GridsearchCV_SEARCH.py`
 
 Design: 
