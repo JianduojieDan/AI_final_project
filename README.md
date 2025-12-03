@@ -49,9 +49,9 @@ This was the most crucial part: forging these raw, different data sources into a
 >     joined_gdf = gpd.sjoin(stores_gdf, sa1_main_gdf, how="inner", predicate="within")
 >     ```
 
-4.  **Feature Engineering:** The professor's final suggestion was implemented in `Group_attributes_to_finalize_data.py`. Instead of using all 136 raw features, this script engineers 15 *meaningful* features like `pop_density`, `core_consumer`, and `competitor_density`. This was the most important step for model performance.
-## 136 columns of raw data already has been grouped to 15 features, if you want to see the origional data, please check push history
-## From Iteration 1 to Iteration 5, i am using 136 columns of feature, but after iteration 5, i switched to grouped features.
+4.  **Feature Engineering:** The professor's final suggestion was implemented in `Group_attributes_to_finalize_data.py`. Instead of using all 127 raw features, this script engineers 15 *meaningful* features like `pop_density`, `core_consumer`, and `competitor_density`. This was the most important step for model performance.
+## 127 columns of raw data already has been grouped to 15 features, if you want to see the origional data, please check push history
+## From Iteration 1 to Iteration 5, i am using 127 columns of feature, but after iteration 5, i switched to grouped features.
 The result of this entire process is the `FINAL_TRAINING_DATASET.csv`.
 
 ## 3. Project Roadmap & Model Iteration
@@ -60,7 +60,7 @@ Our final model was the result of a deliberate, multi-step iteration process, re
 
 ### Iteration 1: `Baseline_RF.py` (The Naive Model)
 
-* **Design:** A standard `RandomForestClassifier` with default settings, trained on the initial 136 features.
+* **Design:** A standard `RandomForestClassifier` with default settings, trained on the initial 127 features.
 * **Problem:** The training data was extremely imbalanced (15,179 "Not Suitable" vs. 621 "Suitable").
 * **Result (Poor):** While accuracy was 96%, this was misleading. The model was "blind" to the minority class, achieving a very low **F1-score of 0.13** for "Suitable" locations.
     ```
@@ -123,8 +123,8 @@ The GridSearch identified the optimal parameters: `max_depth=3` and `n_estimator
 
 ### Iteration 6: Professor's Advice (The "Ultimate Boost")
 
-* **Design:** I consulted the professor again. The problem wasn't the model or the tuning—it was the **features**. We were feeding the model 136 unhelpful, raw data columns.
-* **The Solution:** The `Group_attributes_to_finalize_data.py` script was created. This script implements **feature engineering** to transform the 136 raw columns into 15 highly-relevant, engineered features like `pop_density`, `core_consumer` (key age groups), `competitor_density`, and `food_density`.
+* **Design:** I consulted the professor again. The problem wasn't the model or the tuning—it was the **features**. We were feeding the model 127 unhelpful, raw data columns.
+* **The Solution:** The `Group_attributes_to_finalize_data.py` script was created. This script implements **feature engineering** to transform the 127 raw columns into 15 highly-relevant, engineered features like `pop_density`, `core_consumer` (key age groups), `competitor_density`, and `food_density`.
 * **Final Model:** We re-run the `RF_selector_with_SMOTE_rainforced_GridSearchCV.py` pipeline on these new 15 features. This final, high-recall model is far more valuable for finding the maximum number of business opportunities.
 
 ### Iteration 7: The Final Model (Robust & Generalized)
@@ -136,7 +136,7 @@ We applied the best parameters found in Iteration 5 (`max_depth=3`, `n_estimator
 Result (Realistic & Actionable):
 - **Recall (Suitable Class): 0.63**. The model successfully identifies 63% of all viable locations.
 - **Precision: 0.08**. While precision is lower than the noisy baseline, this trade-off is intentional. In retail site selection, **Recall is King**—it is far more costly to miss a profitable location (False Negative) than to inspect a site that turns out to be bad (False Positive).
-- **Comparison**: Unlike previous iterations that "memorized" noise in 136 features, this model makes decisions based on 15 interpretable, binned business logic rules.
+- **Comparison**: Unlike previous iterations that "memorized" noise in 127 features, this model makes decisions based on 15 interpretable, binned business logic rules.
 ```
 Confusion Matrix:
        [Pred 0] [Pred 1]
@@ -243,7 +243,7 @@ final_project/
 │   │   ├── G33.conven.csv          (Intermediate extracted income data)
 │   │   ├── G62.conven.csv          (Intermediate extracted transport data)
 │   │   ├── osm_features.csv        (Intermediate extracted OSM data)
-│   │   ├── MASTER_Convenience_Store_Dataset.csv (Merged 136-feature dataset)
+│   │   ├── MASTER_Convenience_Store_Dataset.csv (Merged 127-feature dataset)
 │   │   └── FINAL_TRAINING_DATASET.csv     (FINAL 15-feature engineered dataset)
 │   │
 │   ├── Data_selection/
